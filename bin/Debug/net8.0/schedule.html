@@ -1,0 +1,31 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {packages:['timeline']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+var data = new google.visualization.DataTable();
+data.addColumn( {type: 'string', id: 'Machinenumber'});
+data.addColumn( {type: 'string', id: 'Task'});
+data.addColumn( {type: 'date', id: 'Start Date'});
+data.addColumn( {type: 'date', id: 'End Date'});
+data.addRows([
+['Machine 0', 'Job 1', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 0, 8)],
+['Machine 0', 'Job 2', new Date(0, 0, 0, 0, 0, 8), new Date(0, 0, 0, 0, 0, 9)],
+['Machine 0', 'Job 7', new Date(0, 0, 0, 0, 0, 9), new Date(0, 0, 0, 0, 0, 11)],
+['Machine 1', 'Job 6', new Date(0, 0, 0, 0, 0, 5), new Date(0, 0, 0, 0, 0, 11)],
+['Machine 2', 'Job 3', new Date(0, 0, 0, 0, 0, 3), new Date(0, 0, 0, 0, 0, 8)],
+['Machine 2', 'Job 4', new Date(0, 0, 0, 0, 0, 8), new Date(0, 0, 0, 0, 0, 15)],
+['Machine 4', 'Job 5', new Date(0, 0, 0, 0, 0, 2), new Date(0, 0, 0, 0, 0, 6)],
+['Machine 5', 'Job 0', new Date(0, 0, 0, 0, 0, 10), new Date(0, 0, 0, 0, 0, 13)],
+['Machine 5', 'Job 8', new Date(0, 0, 0, 0, 0, 1), new Date(0, 0, 0, 0, 0, 10)],
+]);
+var options = {height: 500};
+var chart = new google.visualization.Timeline(document.getElementById('chart_div'));
+chart.draw(data);
+}
+</script>
+</head>
+<body>
+<div> <p>Tardiness: 15</p> </div>
+<div id="chart_div" style="width: 100%; height: 500px;"></div>
+</body>
