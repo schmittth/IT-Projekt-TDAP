@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WrXFusbj3Wo=",
+  "dgSpecHash": "YeOl8hQn/IA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\tommi\\Documents\\GitHub\\CP_Solver_ITProject\\PM_Solver.csproj",
+  "projectFilePath": "C:\\Users\\tommi\\Documents\\GitHub\\IT-Projekt-TDAP\\PM_Solver.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tommi\\.nuget\\packages\\google.ortools\\9.10.4067\\google.ortools.9.10.4067.nupkg.sha512",
     "C:\\Users\\tommi\\.nuget\\packages\\google.ortools.runtime.linux-arm64\\9.10.4067\\google.ortools.runtime.linux-arm64.9.10.4067.nupkg.sha512",

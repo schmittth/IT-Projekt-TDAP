@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tommi\\Documents\\GitHub\\CP_Solver_ITProject\\PM_Solver.csproj": {}
+    "C:\\Users\\tommi\\Documents\\GitHub\\IT-Projekt-TDAP\\PM_Solver.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tommi\\Documents\\GitHub\\CP_Solver_ITProject\\PM_Solver.csproj": {
+    "C:\\Users\\tommi\\Documents\\GitHub\\IT-Projekt-TDAP\\PM_Solver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tommi\\Documents\\GitHub\\CP_Solver_ITProject\\PM_Solver.csproj",
+        "projectUniqueName": "C:\\Users\\tommi\\Documents\\GitHub\\IT-Projekt-TDAP\\PM_Solver.csproj",
         "projectName": "PM_Solver",
-        "projectPath": "C:\\Users\\tommi\\Documents\\GitHub\\CP_Solver_ITProject\\PM_Solver.csproj",
+        "projectPath": "C:\\Users\\tommi\\Documents\\GitHub\\IT-Projekt-TDAP\\PM_Solver.csproj",
         "packagesPath": "C:\\Users\\tommi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tommi\\Documents\\GitHub\\CP_Solver_ITProject\\obj\\",
+        "outputPath": "C:\\Users\\tommi\\Documents\\GitHub\\IT-Projekt-TDAP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tommi\\AppData\\Roaming\\NuGet\\NuGet.Config"
