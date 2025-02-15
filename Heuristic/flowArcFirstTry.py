@@ -43,7 +43,7 @@ def construct_arc_flow_graph(instance):
 
 #Greedy Eröffnungsheuristik
 def opening_heuristic_greedy(instance):
-    patients_sorted = sorted(enumerate(instance.patients), key=lambda x: (x[1][0], -instance.weights[x[0]]))
+    patients_sorted = sorted(enumerate(instance.patients), key=lambda x: (x[1][0], -(5-instance.weights[x[0]])))
     doctor_completion = [0] * instance.doctors
     schedule = []
     total_cost = 0
@@ -53,7 +53,7 @@ def opening_heuristic_greedy(instance):
         sj = max(rj, doctor_completion[min_doctor])
         doctor_completion[min_doctor] = sj + pj
         Tj = max(0, sj - instance.due_dates[j])
-        total_cost += instance.weights[j] * Tj
+        total_cost += (5-instance.weights[j]) * Tj
         schedule.append((sj, sj + pj, j + 1, min_doctor + 1))
     
     return schedule, total_cost
