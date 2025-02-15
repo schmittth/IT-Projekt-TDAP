@@ -42,7 +42,7 @@ def visualize_schedule(schedule, total_cost,numberOfDoctors, numberOfPatients, b
     
     for start, end, patient, doctor in schedule:
         html_content += f"""
-            ['Doctor {doctor}' , 'Patient {patient}', 'Duration of Treatment {end - start}', new Date(0,0,0,0,0, {start}), new Date(0,0,0,0,0, {end})],
+            ['Doctor {doctor}' , 'Patient {patient}', 'Duration of Treatment {end - start}, Patient {patient}', new Date(0,0,0,0,0, {start}), new Date(0,0,0,0,0, {end})],
         """
     html_content += """
         ]);
