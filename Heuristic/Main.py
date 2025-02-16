@@ -2,6 +2,7 @@ import networkx as nx
 import visualization
 import json
 from classes import Instances
+import Neighbourhoods
 
 
 #Aktuell nicht genutzt 
@@ -43,7 +44,7 @@ def construct_arc_flow_graph(instance):
 
 #Greedy Eröffnungsheuristik
 def opening_heuristic_greedy(instance):
-    patients_sorted = sorted(enumerate(instance.patients), key=lambda x: (x[1][0], instance.weights[x[0]]))
+    patients_sorted = sorted(enumerate(instance.patients), key=lambda x: (x[1][0], -instance.weights[x[0]]))
     doctor_completion = [0] * instance.doctors
     schedule = []
     total_cost = 0
@@ -60,7 +61,6 @@ def opening_heuristic_greedy(instance):
 
 #Mapping der JSON Daten auf die benötigte Datenstruktur
 def map_patient_data(json_file_path, doctors):
-
     with open(json_file_path, 'r') as f:
         data = json.load(f)
 
@@ -71,21 +71,27 @@ def map_patient_data(json_file_path, doctors):
     doctors = doctors
 
     for patient in data:
-        patients.append((patient['arrival_time'], patient['realized_processing_time']))
+        patients.append((patient['arrival_time'], patient['realized_processing_time'], patient['weight']))  # Füge Gewichtung hinzu
         weights.append(patient['weight'])
         due_dates.append(patient['arrival_time'] + patient['max_wait_time'])
 
-    #T Berechnen:
+    # Sortiere Patienten nach Ankunftszeit und dann nach Gewichtung (absteigend)
+    patients.sort(key=lambda x: (x[0], -x[2]))  # Sortiere nach Ankunftszeit (x[0]) und negativer Gewichtung (x[2])
+
+    # T Berechnen:
     max_release = max(patients, key=lambda tupel: tupel[0])[0]
     max_treatment = max(patients, key=lambda tupel: tupel[1])[1]
-    sum_overPatients = sum(x for x,_ in patients)
+    sum_overPatients = sum(x for x,_,_ in patients)
     T = (1/doctors) * sum_overPatients + ((doctors-1)/doctors) * max_treatment + max_release
     
+    # Extrahiere die sortierten Release- und Bearbeitungszeiten für die Instanz
+    sorted_patients_for_instance = [(arrival_time, processing_time) for arrival_time, processing_time, _ in patients]
+
     #Instanz objekt generieren
-    instance = Instances(patients, doctors, due_dates, weights, T)
+    instance = Instances(sorted_patients_for_instance, doctors, due_dates, weights, T)
     return instance
 
-file_path = 'new_test_instances.json'
+file_path = 'test_instances.json'
 print("Wie viel Doktoren arbeiten heute?")
 doctors = int(input())
 
@@ -99,10 +105,7 @@ print("Späteste Behandlungszeiten:", instance.due_dates)
 print(len(instance.patients))
 
 schedule, total_cost = opening_heuristic_greedy(instance)
+print(instance)
 visualization.visualize_schedule(schedule, total_cost, instance.doctors, len(instance.patients))
-print(schedule)
 
-print("Optimierter Zeitplan:")
-for start, end, patient, doctor in schedule:
-    print(f"Patient {patient} von {start} bis {end} mit Arzt {doctor}")
-print(f"Gesamtkosten: {total_cost}")
+Neighbourhoods.test(schedule, instance)

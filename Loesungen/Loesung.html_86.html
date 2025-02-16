@@ -1,0 +1,41 @@
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load("current", {packages:["timeline"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var container = document.getElementById('example3.1');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn({ type: 'string', id: 'DoctorNumber' });
+        dataTable.addColumn({ type: 'string', id: 'PatientNumber' });
+        dataTable.addColumn({ type: 'string', role: 'tooltip' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+
+        dataTable.addRows([
+                ['Doctor 1' , 'Patient 7', 'Duration of Treatment 14, Patient 7', new Date(0,0,0,0,0, 406), new Date(0,0,0,0,0, 420)],
+            
+                ['Doctor 1' , 'Patient 1', 'Duration of Treatment 15, Patient 1', new Date(0,0,0,0,0, 420), new Date(0,0,0,0,0, 435)],
+            
+                ['Doctor 1' , 'Patient 3', 'Duration of Treatment 18, Patient 3', new Date(0,0,0,0,0, 435), new Date(0,0,0,0,0, 453)],
+            
+                ['Doctor 1' , 'Patient 5', 'Duration of Treatment 14, Patient 5', new Date(0,0,0,0,0, 453), new Date(0,0,0,0,0, 467)],
+            
+                ['Doctor 1' , 'Patient 9', 'Duration of Treatment 12, Patient 9', new Date(0,0,0,0,0, 467), new Date(0,0,0,0,0, 479)],
+            
+                ['Doctor 2' , 'Patient 6', 'Duration of Treatment 14, Patient 6', new Date(0,0,0,0,0, 405), new Date(0,0,0,0,0, 419)],
+            
+                ['Doctor 2' , 'Patient 2', 'Duration of Treatment 18, Patient 2', new Date(0,0,0,0,0, 419), new Date(0,0,0,0,0, 437)],
+            
+                ['Doctor 2' , 'Patient 4', 'Duration of Treatment 14, Patient 4', new Date(0,0,0,0,0, 437), new Date(0,0,0,0,0, 451)],
+            
+                ['Doctor 2' , 'Patient 8', 'Duration of Treatment 14, Patient 8', new Date(0,0,0,0,0, 451), new Date(0,0,0,0,0, 465)],
+            
+        ]);
+        chart.draw(dataTable);
+        }
+        </script>
+        <div><p>Weighted Tardiness: 248; Number of Doctors: 2; Number of Patients: 9</p></div>
+        <div id="example3.1" style="height: 1000px;"></div>
+    

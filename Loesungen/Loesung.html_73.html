@@ -1,0 +1,32 @@
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load("current", {packages:["timeline"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var container = document.getElementById('example3.1');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn({ type: 'string', id: 'DoctorNumber' });
+        dataTable.addColumn({ type: 'string', id: 'PatientNumber' });
+        dataTable.addColumn({ type: 'string', role: 'tooltip' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+
+        // Beispiel für das Hinzufügen von Daten zum Zeitplan
+        dataTable.addRows([
+            ['Doctor 1' , 'Patient 1', 'Duration of Treatment 15, Patient 1', new Date(0,0,0,0,0, 400), new Date(0,0,0,0,0, 415)],
+        
+            ['Doctor 1' , 'Patient 2', 'Duration of Treatment 18, Patient 2', new Date(0,0,0,0,0, 415), new Date(0,0,0,0,0, 433)],
+        
+            ['Doctor 1' , 'Patient 3', 'Duration of Treatment 18, Patient 3', new Date(0,0,0,0,0, 433), new Date(0,0,0,0,0, 451)],
+        
+            ['Doctor 1' , 'Patient 4', 'Duration of Treatment 12, Patient 4', new Date(0,0,0,0,0, 451), new Date(0,0,0,0,0, 463)],
+        
+        ]);
+        chart.draw(dataTable);
+        }
+        </script>
+        <div><p>Weighted Tardiness: 51; Number of Doctors: 1; Number of Patients: 4</p></div>
+        <div id="example3.1" style="height: 1000px;"></div>
+    
