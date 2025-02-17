@@ -18,7 +18,7 @@ def get_next_filename_number(directory, filename_base="Loesung"):
     return max(existing_numbers) + 1
 
 #Visualisierung mit Google in HTML für Greedy
-def visualize_schedule(schedule, total_cost, numberOfDoctors, numberOfPatients, basisfilename="Loesung.html"):
+def visualize_schedule(schedule, total_cost, numberOfDoctors, numberOfPatients, basisfilename="Greedy_Loesung.html"):
     next_number = get_next_filename_number('./Loesungen', basisfilename)
     filename = os.path.join('./Loesungen', f"{basisfilename}_{next_number}.html")
 
@@ -61,7 +61,7 @@ def visualize_schedule(schedule, total_cost, numberOfDoctors, numberOfPatients, 
     print(f"HTML-Datei '{filename}' wurde erfolgreich erstellt.")
     webbrowser.open(filename)
 
-def visualize_schedule_perDoc(schedule, total_cost, numberOfDoctors, numberOfPatients, basisfilename="Loesung.html"):
+def visualize_schedule_perDoc(schedule, total_cost, numberOfDoctors, numberOfPatients, basisfilename="N1_LS_Loesung.html"):
     next_number = get_next_filename_number('./Loesungen', basisfilename)
     filename = os.path.join('./Loesungen', f"{basisfilename}_{next_number}.html")
 
