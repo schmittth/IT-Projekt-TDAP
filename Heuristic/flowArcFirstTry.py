@@ -43,7 +43,7 @@ def construct_arc_flow_graph(instance):
 
 #Greedy Eröffnungsheuristik
 def opening_heuristic_greedy(instance):
-    patients_sorted = sorted(enumerate(instance.patients), key=lambda x: (x[1][0], -instance.weights[x[0]]))
+    patients_sorted = sorted(enumerate(instance.patients), key=lambda x: (x[1][0], instance.weights[x[0]]))
     doctor_completion = [0] * instance.doctors
     schedule = []
     total_cost = 0
@@ -85,7 +85,7 @@ def map_patient_data(json_file_path, doctors):
     instance = Instances(patients, doctors, due_dates, weights, T)
     return instance
 
-file_path = 'test_instances.json'
+file_path = 'new_test_instances.json'
 print("Wie viel Doktoren arbeiten heute?")
 doctors = int(input())
 
