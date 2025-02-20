@@ -1,7 +1,8 @@
 import networkx as nx
+import numpy as np
 import visualization
 import json
-from classes import Instances
+from classes import Instance
 
 
 #Aktuell nicht genutzt 
@@ -43,20 +44,32 @@ def construct_arc_flow_graph(instance):
 
 #Greedy Eröffnungsheuristik
 def opening_heuristic_greedy(instance):
-    patients_sorted = sorted(enumerate(instance.patients), key=lambda x: (x[1][0], instance.weights[x[0]]))
+    sorted_patients = sorted(instance.patients, key=lambda x: x[1])
+    patients_sorted = [(i, patient) for i, patient in enumerate(sorted_patients)]
     doctor_completion = [0] * instance.doctors
-    schedule = []
+    schedule = {}
     total_cost = 0
 
-    for j, (rj, pj) in patients_sorted:
+    for doc in range(1, instance.doctors+1):
+        schedule[doc] = []
+
+    for j, (id, rj, pj) in patients_sorted:
         min_doctor = min(range(instance.doctors), key=lambda d: doctor_completion[d])
         sj = max(rj, doctor_completion[min_doctor])
         doctor_completion[min_doctor] = sj + pj
         Tj = max(0, sj - instance.due_dates[j])
         total_cost += instance.weights[j] * Tj
-        schedule.append((sj, sj + pj, j + 1, min_doctor + 1))
+        add_entry(schedule, min_doctor+1, [id, rj, pj,  sj, sj+pj, instance.due_dates[j],max(0, sj -instance.due_dates[j]), instance.weights[j]])
     
+    for doctor in schedule:
+        schedule[doctor] = np.array(schedule[doctor])
+
     return schedule, total_cost
+
+# Funktion zum Hinzufügen eines Eintrags
+def add_entry(schedule, doctor, patient):
+    # Füge den neuen Eintrag hinzu
+    schedule[doctor].append(patient)
 
 #Mapping der JSON Daten auf die benötigte Datenstruktur
 def map_patient_data(json_file_path, doctors):
@@ -71,38 +84,40 @@ def map_patient_data(json_file_path, doctors):
     doctors = doctors
 
     for patient in data:
-        patients.append((patient['arrival_time'], patient['realized_processing_time']))
+        patients.append((patient['patient_id'], patient['arrival_time'], patient['realized_processing_time']))
         weights.append(patient['weight'])
         due_dates.append(patient['arrival_time'] + patient['max_wait_time'])
 
+
     #T Berechnen:
-    max_release = max(patients, key=lambda tupel: tupel[0])[0]
-    max_treatment = max(patients, key=lambda tupel: tupel[1])[1]
-    sum_overPatients = sum(x for x,_ in patients)
+    #max_release = max(patients, key=lambda tupel: tupel[0])[0]
+    max_release = max(patients, key=lambda tupel: tupel[1])[1]
+    max_treatment = max(patients, key=lambda tupel: tupel[2])[2]
+    sum_overPatients = sum(x for _,x,_ in patients)
     T = (1/doctors) * sum_overPatients + ((doctors-1)/doctors) * max_treatment + max_release
     
     #Instanz objekt generieren
-    instance = Instances(patients, doctors, due_dates, weights, T)
+    instance = Instance(patients, doctors, due_dates, weights, T)
     return instance
 
-file_path = 'new_test_instances.json'
-print("Wie viel Doktoren arbeiten heute?")
-doctors = int(input())
+# file_path = 'new_test_instances.json'
+# print("Wie viel Doktoren arbeiten heute?")
+# doctors = int(input())
 
-instance = map_patient_data(file_path, doctors)
+# instance = map_patient_data(file_path, doctors)
 
-print("Patienten:", instance.patients)
-print("Anzahl der Doktoren:", instance.doctors)
-print("Maximale Laufzeit:", instance.T)
-print("Gewichte:", instance.weights)
-print("Späteste Behandlungszeiten:", instance.due_dates)
-print(len(instance.patients))
+# print("Patienten:", instance.patients)
+# print("Anzahl der Doktoren:", instance.doctors)
+# print("Maximale Laufzeit:", instance.T)
+# print("Gewichte:", instance.weights)
+# print("Späteste Behandlungszeiten:", instance.due_dates)
+# print(len(instance.patients))
 
-schedule, total_cost = opening_heuristic_greedy(instance)
-visualization.visualize_schedule(schedule, total_cost, instance.doctors, len(instance.patients))
-print(schedule)
+# schedule, total_cost = opening_heuristic_greedy(instance)
+# visualization.visualize_schedule(schedule, total_cost, instance.doctors, len(instance.patients))
+# print(schedule)
 
-print("Optimierter Zeitplan:")
-for start, end, patient, doctor in schedule:
-    print(f"Patient {patient} von {start} bis {end} mit Arzt {doctor}")
-print(f"Gesamtkosten: {total_cost}")
+# print("Optimierter Zeitplan:")
+# for start, end, patient, doctor in schedule:
+#     print(f"Patient {patient} von {start} bis {end} mit Arzt {doctor}")
+# print(f"Gesamtkosten: {total_cost}")
