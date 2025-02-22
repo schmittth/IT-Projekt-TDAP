@@ -5,7 +5,7 @@ from ortools.sat.python import cp_model
 
 
 # Lade Patientendaten aus test_instances.json
-with open("test_instances.json", "r") as file:
+with open("test_instances1.json", "r") as file:
     test_instances = json.load(file)
 
 # Flache Liste aller Patienten (da in Gruppen gespeichert)
