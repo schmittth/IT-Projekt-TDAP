@@ -286,7 +286,7 @@ def VND(schedule, overall_tardiness, neighborhoods, Max_d=120):
 
 import time
 
-def general_vns(initial_schedule, initial_tardiness ,neighborhoods, Max_d=120, no_improvement_limit=10, time_limit=90):
+def general_vns(initial_schedule, initial_tardiness ,neighborhoods, Max_d=120, no_improvement_limit=10, time_limit=120):
     current_schedule = deepcopy(initial_schedule)
     best_schedule = current_schedule
     best_schedule_tardiness = initial_tardiness
@@ -310,5 +310,7 @@ def general_vns(initial_schedule, initial_tardiness ,neighborhoods, Max_d=120, n
             no_improvement_count = 0  # Reset, da eine Verbesserung gefunden wurde
         else:
             no_improvement_count += 1
+    
+    completion_time = time.time() - start_time
 
-    return best_schedule, best_schedule_tardiness
+    return best_schedule, best_schedule_tardiness, completion_time

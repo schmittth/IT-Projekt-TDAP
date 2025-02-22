@@ -1,0 +1,2 @@
+Datum und Zeit,filePath,Doktoren,Weighted Tardiness after Opening,Used Meta-heuristic,Weighted Tardiness after Meta-Heuristic,Deterministic,Completion Time in seconds
+2025-02-22 17:30:17,new_test_instances.json,2,13278,Variable Neighborhood Search,10593,Yes,11.41098952293396

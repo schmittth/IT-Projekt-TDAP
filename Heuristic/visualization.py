@@ -1,6 +1,8 @@
 import webbrowser
 import os
 import re
+import csv
+from datetime import datetime
 
 #Wie viele Files sind im Loesungen Odner?
 def get_next_filename_number(directory, filename_base="Loesung"):
@@ -60,3 +62,34 @@ def visualize_schedule(schedule, total_cost,numberOfDoctors, numberOfPatients, b
 
     print(f"HTML-Datei '{filename}' wurde erfolgreich erstellt.")
     webbrowser.open(filename)
+
+def log_data_to_csv(file_path, doctors, greedy_solution, result_vns, meta_heuristic, isDeterministic, completion_time, log_file_path="Log.csv"):
+    # Aktuelles Datum und Zeit abrufen
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Weighted Tardiness aus der Greedy-Lösung extrahieren
+    weighted_tardiness_greedy = greedy_solution[1]
+
+    if isDeterministic:
+        yesNo = "Yes"
+    else:
+        yesNo = "No"
+
+    # Daten für die CSV-Datei vorbereiten
+    data = [now, file_path, doctors, weighted_tardiness_greedy, meta_heuristic, result_vns, yesNo, completion_time]
+
+    # In die CSV-Datei schreiben oder anhängen
+    file_exists = False
+    try:
+        with open(log_file_path, 'r', newline='') as csvfile:
+            file_exists = True
+    except FileNotFoundError:
+        pass
+
+    with open(log_file_path, 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        if not file_exists:
+            writer.writerow(["Datum und Zeit", "filePath", "Doktoren", "Weighted Tardiness after Opening","Used Meta-heuristic", "Weighted Tardiness after Meta-Heuristic", "Deterministic", "Completion Time in seconds"]) #Header schreiben
+        writer.writerow(data)
+
+    print(f"Daten wurden in '{log_file_path}' gespeichert.")
