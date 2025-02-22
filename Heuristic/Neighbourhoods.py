@@ -216,3 +216,99 @@ def best_swap_N3(schedule, key1, key2, Max_d = 120):
                 best_schedule = swapped_schedule
     
     return best_schedule, lowest_combined_tardiness
+
+from copy import deepcopy
+import random
+
+def shake(schedule, Max_d):
+    temp_schedule = deepcopy(schedule)
+    
+    # Wähle eine zufällige Nachbarschaftsoperation: N1, N2 oder N3
+    operation = random.choice(['N1', 'N2', 'N3'])
+    keys = list(schedule.keys())
+    if operation == 'N3' and len(keys)>1:
+        # Randomly select two doctors and one patient from each for N3
+        key1, key2 = random.sample(keys, 2)
+        index1 = random.randint(0, temp_schedule[key1].shape[0] - 1)
+        index2 = random.randint(0, temp_schedule[key2].shape[0] - 1)
+        temp_schedule = swap_patients_between_docs_N3(temp_schedule, [key1, index1], [key2, index2],  Max_d=Max_d)
+
+    elif operation == 'N1':
+        # Randomly select a doctor and two patient indices for N1
+        key = random.choice(keys)
+        if temp_schedule[key].shape[0] > 1:
+            i, j = random.sample(range(temp_schedule[key].shape[0]), 2)
+            temp_schedule = swap_patients_by_doc_N1(temp_schedule, key, i, j, Max_d=Max_d)
+    
+    elif operation == 'N2':
+        # Randomly select a doctor and two patient indices for N2
+        key = random.choice(keys)
+        if temp_schedule[key].shape[0] > 1:
+            i, j = random.sample(range(temp_schedule[key].shape[0]), 2)
+            patient_id_to_move = temp_schedule[key][i, 0]
+            patient_id_target = temp_schedule[key][j, 0]
+            temp_schedule = insert_patient_by_doc_N2(temp_schedule, key, patient_id_to_move, patient_id_target,  Max_d=Max_d)
+    
+
+
+    overall_tardiness = 0
+    for key in temp_schedule:
+        overall_tardiness += weighted_tardiness_per_doc(temp_schedule, key)
+    
+    return temp_schedule, overall_tardiness
+
+def VND(schedule, overall_tardiness, neighborhoods, Max_d=120):
+    current_schedule = deepcopy(schedule)
+    current_tardiness = overall_tardiness
+    improvement = True
+
+    while improvement:
+        improvement = False
+        for neighborhood in neighborhoods:
+            # Führe die lokale Suche für die aktuelle Nachbarschaft aus
+            if neighborhood == "N1":
+                new_schedule, _ = local_search(schedule, neighborhood="N1", Max_d=Max_d)
+            elif neighborhood == "N2":
+                new_schedule, _ = local_search(schedule, neighborhood="N2", Max_d=Max_d)
+            elif neighborhood == "N3":
+                new_schedule, _ = local_search(schedule, neighborhood="N3", Max_d=Max_d)
+            else:
+                continue
+
+            # Vergleiche die neue und aktuelle Lösung
+            if _ < current_tardiness:
+                current_schedule = new_schedule
+                current_tardiness = _
+                improvement = True
+                break  # Beginne die Suche erneut bei der ersten Nachbarschaft
+
+    return current_schedule, current_tardiness
+
+import time
+
+def general_vns(initial_schedule, initial_tardiness ,neighborhoods, Max_d=120, no_improvement_limit=10, time_limit=90):
+    current_schedule = deepcopy(initial_schedule)
+    best_schedule = current_schedule
+    best_schedule_tardiness = initial_tardiness
+    no_improvement_count = 0
+
+    start_time = time.time()
+
+
+    while time.time() - start_time <= time_limit:
+        # Shake: Erzeugen einer neuen Lösung durch eine zufällige Veränderung
+        shaken_schedule, shaken_tardiness = shake(current_schedule, Max_d=Max_d)
+
+        # VND: Anwenden der lokalen Optimierung
+        vnd_schedule, vnd_tardiness = VND(shaken_schedule, shaken_tardiness ,neighborhoods, Max_d)
+
+        # Bewertung der neuen Lösung
+        if vnd_tardiness < best_schedule_tardiness:
+            best_schedule = vnd_schedule
+            best_schedule_tardiness = vnd_tardiness
+            current_schedule = vnd_schedule
+            no_improvement_count = 0  # Reset, da eine Verbesserung gefunden wurde
+        else:
+            no_improvement_count += 1
+
+    return best_schedule, best_schedule_tardiness
