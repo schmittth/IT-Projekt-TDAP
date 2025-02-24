@@ -20,9 +20,11 @@ def get_next_filename_number(directory, filename_base="Loesung"):
     return max(existing_numbers) + 1
 
 #Visualisierung mit Google in HTML
-def visualize_schedule(schedule, total_cost,numberOfDoctors, numberOfPatients, basisfilename="Loesung.html"):
+def visualize_schedule(schedule, total_cost, basisfilename="Loesung.html"):
     next_number = get_next_filename_number('./Loesungen', basisfilename)
     filename = os.path.join('./Loesungen', f"{basisfilename}_{next_number}.html")
+    numberOfPatients = get_number_of_patients(schedule)
+    numberOfDoctors = len(schedule)
 
     html_content = f"""
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -39,13 +41,16 @@ def visualize_schedule(schedule, total_cost,numberOfDoctors, numberOfPatients, b
         dataTable.addColumn({{ type: 'date', id: 'Start' }});
         dataTable.addColumn({{ type: 'date', id: 'End' }});
 
-        // Beispiel für das Hinzufügen von Daten zum Zeitplan
         dataTable.addRows(["""
     
-    for start, end, patient, doctor in schedule:
-        html_content += f"""
-            ['Doctor {doctor}' , 'Patient {patient}', 'Duration of Treatment {end - start}, Patient {patient}', new Date(0,0,0,0,0, {start}), new Date(0,0,0,0,0, {end})],
-        """
+    for doctor, patient_data in schedule.items():
+        for row in patient_data:
+            patient_id = row[0]
+            start_time = row[3]
+            end_time = row[4]
+            html_content += f"""
+                ['Doctor {doctor}' , 'Patient {patient_id}', 'Duration of Treatment {end_time - start_time}, Patient {patient_id}', new Date(0,0,0,0,0, {start_time}), new Date(0,0,0,0,0, {end_time})],
+            """
     html_content += """
         ]);
         chart.draw(dataTable);
@@ -93,3 +98,13 @@ def log_data_to_csv(file_path, doctors, greedy_solution, result_vns, meta_heuris
         writer.writerow(data)
 
     print(f"Daten wurden in '{log_file_path}' gespeichert.")
+
+def get_number_of_patients(schedule_dict):
+
+    max_patient_id = 0
+    for patient_data in schedule_dict.values():
+        for row in patient_data:
+            patient_id = row[0]
+            max_patient_id = max(max_patient_id, patient_id)
+
+    return max_patient_id

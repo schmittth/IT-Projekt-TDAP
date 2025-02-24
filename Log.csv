@@ -1,3 +1,9 @@
 Datum und Zeit,filePath,Doktoren,Weighted Tardiness after Opening,Used Meta-heuristic,Weighted Tardiness after Meta-Heuristic,Deterministic,Completion Time in seconds
 2025-02-22 17:30:17,new_test_instances.json,2,13278,Variable Neighborhood Search,10593,Yes,11.41098952293396
 2025-02-24 15:57:24,new_test_instances.json,2,13278,Variable Neighborhood Search,8634,Yes,92.45010733604431
+2025-02-24 16:22:47,new_test_instances.json,2,13278,Variable Neighborhood Search,10714,Yes,21.393128633499146
+2025-02-24 16:23:21,new_test_instances_short.json,2,751,Variable Neighborhood Search,113,Yes,20.059093475341797
+2025-02-24 16:54:12,new_test_instances_short.json,2,751,Variable Neighborhood Search,112,Yes,20.03026247024536
+2025-02-24 16:56:20,new_test_instances_short.json,2,751,Variable Neighborhood Search,109,Yes,10.038591623306274
+2025-02-24 17:00:15,new_test_instances_short.json,2,751,Variable Neighborhood Search,112,Yes,5.070285081863403
+2025-02-24 17:01:37,new_test_instances.json,2,13278,Variable Neighborhood Search,11630,Yes,5.14298939704895
