@@ -3,13 +3,13 @@ import Neighbourhoods as nh
 import classes
 
 file_path = 'new_test_instances.json'
-doctors = 2
+doctors = 8
 instance = eh.map_patient_data(file_path, doctors)
 result = eh.opening_heuristic_greedy(instance)
 
 #print(result)
 
-#result_vns = nh.general_vns(result[0], result[1], ["N1", "N2", "N3"], time_limit=90, no_improvement_limit=1000)
+result_vns = nh.general_vns(result[0], result[1], ["N1", "N2", "N3"], time_limit=90, no_improvement_limit=1000)
 
 result_sa = nh.simulated_annealing(result[0], result[1], time_limit=90, Imax=3000, cooling_rate=0.999, start_temperature=10)
 print(result_vns[0])
