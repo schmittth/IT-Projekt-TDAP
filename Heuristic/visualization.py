@@ -20,7 +20,7 @@ def get_next_filename_number(directory, filename_base="Loesung"):
     return max(existing_numbers) + 1
 
 #Visualisierung mit Google in HTML
-def visualize_schedule(schedule, total_cost, basisfilename="Loesung.html"):
+def visualize_schedule(schedule, total_cost, runTime, basisfilename="Loesung.html"):
     next_number = get_next_filename_number('./Loesungen', basisfilename)
     filename = os.path.join('./Loesungen', f"{basisfilename}_{next_number}.html")
     numberOfPatients = get_number_of_patients(schedule)
@@ -57,7 +57,7 @@ def visualize_schedule(schedule, total_cost, basisfilename="Loesung.html"):
         }"""
     html_content += f"""
         </script>
-        <div><p>Weighted Tardiness: {total_cost}; Number of Doctors: {numberOfDoctors}; Number of Patients: {numberOfPatients}</p></div>
+        <div><p>Weighted Tardiness: {total_cost}; Number of Doctors: {numberOfDoctors}; Number of Patients: {numberOfPatients}; Runtime: {runTime}</p></div>
         <div id=\"example3.1\" style=\"height: 1000px;\"></div>
     """
 
@@ -68,6 +68,7 @@ def visualize_schedule(schedule, total_cost, basisfilename="Loesung.html"):
     print(f"HTML-Datei '{filename}' wurde erfolgreich erstellt.")
     webbrowser.open(filename)
 
+#Schreibe relevante Daten in die Log.csv
 def log_data_to_csv(file_path, doctors, greedy_solution, result_vns, meta_heuristic, isDeterministic, completion_time, log_file_path="Log.csv"):
     # Aktuelles Datum und Zeit abrufen
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
