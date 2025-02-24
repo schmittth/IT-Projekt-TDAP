@@ -19,8 +19,8 @@ def get_next_filename_number(directory, filename_base="Loesung"):
 
     return max(existing_numbers) + 1
 
-#Visualisierung mit Google in HTML
-def visualize_schedule(schedule, total_cost, runTime, basisfilename="Loesung.html"):
+#Visualisierung mit GoogleCharts in HTML
+def visualize_schedule(schedule, total_cost, runTime, basisfilename):
     next_number = get_next_filename_number('./Loesungen', basisfilename)
     filename = os.path.join('./Loesungen', f"{basisfilename}_{next_number}.html")
     numberOfPatients = get_number_of_patients(schedule)
@@ -76,6 +76,7 @@ def log_data_to_csv(file_path, doctors, greedy_solution, result_vns, meta_heuris
     # Weighted Tardiness aus der Greedy-Lösung extrahieren
     weighted_tardiness_greedy = greedy_solution[1]
 
+    #Identifiziere ob Eintrag ein Deterministischer Durchlauf war
     if isDeterministic:
         yesNo = "Yes"
     else:
@@ -100,6 +101,7 @@ def log_data_to_csv(file_path, doctors, greedy_solution, result_vns, meta_heuris
 
     print(f"Daten wurden in '{log_file_path}' gespeichert.")
 
+#Gib Anzahl der Patienten zurück
 def get_number_of_patients(schedule_dict):
 
     max_patient_id = 0

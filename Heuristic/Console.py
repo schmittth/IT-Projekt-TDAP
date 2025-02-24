@@ -1,13 +1,13 @@
 import os
 
-
+#Ausführen der Konsolenapplikation
 def executeConsole ():
     filePath, doctors = chooseInstanceAndDoctors()
     runTime = chooseRunTime()
 
     return filePath, doctors, runTime
 
-
+#Abfrage der Instanz und der Anzahl der Doktoren
 def chooseInstanceAndDoctors ():
     print('Welche der vorhandenen Instanzen wollen sie importieren?')
     liste = liste_json_dateien()
@@ -25,6 +25,7 @@ def chooseInstanceAndDoctors ():
 
     return(chosenInput, doctors)
 
+#Abfrage der Laufzeit
 def chooseRunTime():
     print('Welche Laufzeitbeschränkung (in sekunden) soll angewandt werden?')
 
@@ -32,10 +33,8 @@ def chooseRunTime():
 
     return runTime
 
-
-
+#Au
 def liste_json_dateien():
-
     json_dateipfade = []
     for datei in os.listdir():
         if datei.endswith(".json"):

@@ -12,3 +12,6 @@ Datum und Zeit,filePath,Doktoren,Weighted Tardiness after Opening,Used Meta-heur
 2025-02-24 17:33:16,new_test_instances_short.json,2,751,Variable Neighborhood Search,112,Yes,5.022160530090332
 2025-02-24 17:35:41,new_test_instances_short.json,2,751,Variable Neighborhood Search,112,Yes,120.02246737480164
 2025-02-24 17:44:36,new_test_instances_short.json,2,751,Variable Neighborhood Search,124,Yes,3.0377562046051025
+2025-02-24 19:13:10,new_test_instances_short.json,3,159,Variable Neighborhood Search,0,Yes,10.01177453994751
+2025-02-24 19:22:13,new_test_instances_short.json,2,751,Variable Neighborhood Search,109,Yes,10.027515411376953
+2025-02-24 19:32:48,new_test_instances_short.json,10,0,Variable Neighborhood Search,0,Yes,5.0075836181640625
