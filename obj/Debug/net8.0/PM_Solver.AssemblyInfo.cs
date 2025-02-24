@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PM_Solver")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb46905d48cc374f4bbd57d444943c9737ecfee0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d29373857ee5ad8b4a3b0253d0f5e82f6e877223")]
 [assembly: System.Reflection.AssemblyProductAttribute("PM_Solver")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PM_Solver")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
