@@ -1,23 +1,23 @@
 import flowArcFirstTry as eh
 import Neighbourhoods as nh
 import classes
+import visualization
+import Console
 
-file_path = 'new_test_instances.json'
-doctors = 8
-instance = eh.map_patient_data(file_path, doctors)
+filePath, doctors, runTime = Console.executeConsole()
+instance = eh.map_patient_data(filePath, doctors)
 result = eh.opening_heuristic_greedy(instance)
 
 #print(result)
 
-result_vns = nh.general_vns(result[0], result[1], ["N1", "N2", "N3"], time_limit=90, no_improvement_limit=1000)
-
-result_sa = nh.simulated_annealing(result[0], result[1], time_limit=90, Imax=3000, cooling_rate=0.999, start_temperature=10)
+result_vns = nh.general_vns(result[0], result[1], ["N1", "N2", "N3"], time_limit = runTime)
 print(result_vns[0])
-print(result_sa[0])
+#print(result_sa[0])
 
-print(f"VNS Tardiness: {result_vns[1]}")
-print(f"SA Tardiness: {result_sa[1]} with temperature: {result_sa[2]}")
+visualization.visualize_schedule(result_vns[0], result_vns[1], result_vns[2], "VNS_Loesung")
 
-print(result_sa[0])
+print(f"Tardiness: {result_vns[1]}")
 
-print(nh.weighted_tardiness_per_doc(result_sa[0], 1)+nh.weighted_tardiness_per_doc(result_sa[0], 2))
+print(result_vns[2])
+
+visualization.log_data_to_csv(filePath, len(result_vns[0]), result, result_vns[1], 'Variable Neighborhood Search', True, result_vns[2])
