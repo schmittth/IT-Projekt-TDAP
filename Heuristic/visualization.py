@@ -111,3 +111,37 @@ def get_number_of_patients(schedule_dict):
             max_patient_id = max(max_patient_id, patient_id)
 
     return max_patient_id
+
+# HTML-Gantt-Chart generieren
+def visualizeCP (assigned_tasks, objective):
+        with open("schedule.html", "w") as f:
+            f.write("""
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+            google.charts.load('current', {packages:['timeline']});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Doctor');
+                data.addColumn('string', 'Patient');
+                data.addColumn('date', 'Start');
+                data.addColumn('date', 'End');
+                data.addRows([
+            """)
+
+            for doctor_id, tasks in assigned_tasks.items():
+                for patient_id, start, duration in tasks:
+                    f.write(f"['Doctor {doctor_id}', 'Patient {patient_id}', new Date(0,0,0,0,0,{start}), new Date(0,0,0,0,0,{start + duration})],\n")
+
+            f.write("""
+                ]);
+                var options = { height: 500 };
+                var chart = new google.visualization.Timeline(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+            </script>
+            <div><p>Tardiness: """ + str({objective}) + """</p></div>
+            <div id="chart_div" style="width: 100%; height: 500px;"></div>
+            """)
+
+        webbrowser.open("schedule.html")

@@ -13,26 +13,46 @@ def opening_heuristic_greedy(instance):
     schedule = {}
     total_cost = 0
 
-    for doc in range(1, instance.doctors+1):
+    for doc in range(1, instance.doctors + 1):
         schedule[doc] = []
 
     for j, (id, rj, pj) in patients_sorted:
-        min_doctor = min(range(instance.doctors), key=lambda d: doctor_completion[d])
-        sj = max(rj, doctor_completion[min_doctor])
+        available_doctors = []
+        for d in range(instance.doctors):
+            if doctor_completion[d] <= rj:
+                available_doctors.append(d)
+
+        if available_doctors:
+            if len(available_doctors) == 1:
+                min_doctor = available_doctors[0]
+            else:
+                # Berechne die Arztgewichtung dynamisch
+                doctor_weights = []
+                for d in available_doctors:
+                    doctor_weight = sum(row[2] for row in schedule.get(d + 1, []))  # Summiere Bearbeitungszeiten
+                    doctor_weights.append(doctor_weight)
+                min_doctor = available_doctors[doctor_weights.index(min(doctor_weights))]
+
+            sj = rj
+        else:
+            min_doctor = min(range(instance.doctors), key=lambda d: doctor_completion[d])
+            sj = max(rj, doctor_completion[min_doctor])
+
         doctor_completion[min_doctor] = sj + pj
         Tj = max(0, sj - instance.due_dates[j])
         total_cost += instance.weights[j] * Tj
-        add_entry(schedule, min_doctor+1, [id, rj, pj,  sj, sj+pj, instance.due_dates[j],max(0, sj -instance.due_dates[j]), instance.weights[j]])
-    
+        add_entry(schedule, min_doctor + 1, [id, rj, pj, sj, sj + pj, instance.due_dates[j], max(0, sj - instance.due_dates[j]), instance.weights[j]])
+
     for doctor in schedule:
         schedule[doctor] = np.array(schedule[doctor])
 
     return schedule, total_cost
 
-# Funktion zum Hinzufügen eines Eintrags
-def add_entry(schedule, doctor, patient):
-    # Füge den neuen Eintrag hinzu
-    schedule[doctor].append(patient)
+#Patient einplanen
+def add_entry(schedule, doctor, entry):
+    if doctor not in schedule:
+        schedule[doctor] = []
+    schedule[doctor].append(entry)
 
 #Mapping der JSON Daten auf die benötigte Datenstruktur
 def map_patient_data(json_file_path, doctors):
