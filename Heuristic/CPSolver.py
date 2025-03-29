@@ -264,4 +264,4 @@ def solveCPDynamic (waitingRoom, earliestStart):
     else:
         print("Keine Lösung gefunden.")
 
-solveCPdeterministic("Test.json", 1, 10)
+solveCPdeterministic("new_test_instances_short.json", 2, 20)

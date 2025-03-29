@@ -47,3 +47,4 @@ Datum und Zeit,filePath,Doktoren,Weighted Tardiness after Opening,Used Meta-heur
 2025-03-24 17:43:57,new_test_instances.json,4,/,CPSolver,0.0,Yes,0.17634868621826172
 2025-03-24 17:46:20,new_test_instances.json,3,/,CPSolver,1214.0,Yes,60.04682421684265
 2025-03-29 13:47:45,Test.json,1,/,CPSolver,0.0,Yes,0.03567767143249512
+2025-03-29 13:50:48,new_test_instances_short.json,2,/,CPSolver,0.0,Yes,0.030150413513183594
