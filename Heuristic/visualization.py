@@ -112,36 +112,120 @@ def get_number_of_patients(schedule_dict):
 
     return max_patient_id
 
-# HTML-Gantt-Chart generieren
-def visualizeCP (assigned_tasks, objective):
-        with open("schedule.html", "w") as f:
-            f.write("""
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script type="text/javascript">
-            google.charts.load('current', {packages:['timeline']});
-            google.charts.setOnLoadCallback(drawChart);
-            function drawChart() {
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Doctor');
-                data.addColumn('string', 'Patient');
-                data.addColumn('date', 'Start');
-                data.addColumn('date', 'End');
-                data.addRows([
-            """)
+#Visualisierung der dynamischen CP Lösung mit GoogleCharts in HTML
+def visualizeCPDynamic(schedule, total_cost, runTime):
+    next_number = get_next_filename_number('./CPLoesungen', 'Loesung')
+    filename = os.path.join('./CPLoesungen', f"{'Loesung'}_{next_number}.html")
 
-            for doctor_id, tasks in assigned_tasks.items():
-                for patient_id, start, duration in tasks:
-                    f.write(f"['Doctor {doctor_id}', 'Patient {patient_id}', new Date(0,0,0,0,0,{start}), new Date(0,0,0,0,0,{start + duration})],\n")
+    html_content = f"""
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load("current", {{packages:["timeline"]}});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {{
+        var container = document.getElementById('example3.1');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn({{ type: 'string', id: 'DoctorNumber' }});
+        dataTable.addColumn({{ type: 'string', id: 'PatientNumber' }});
+        dataTable.addColumn({{ type: 'string', role: 'tooltip' }});
+        dataTable.addColumn({{ type: 'date', id: 'Start' }});
+        dataTable.addColumn({{ type: 'date', id: 'End' }});
 
-            f.write("""
-                ]);
-                var options = { height: 500 };
-                var chart = new google.visualization.Timeline(document.getElementById('chart_div'));
-                chart.draw(data, options);
-            }
-            </script>
-            <div><p>Tardiness: """ + str({objective}) + """</p></div>
-            <div id="chart_div" style="width: 100%; height: 500px;"></div>
-            """)
+        dataTable.addRows(["""
+    
+    for doctor, patient_data in schedule.items():
+        for row in patient_data:
+            patient_id = row[0]
+            start_time = row[3]
+            end_time = row[4]
+            html_content += f"""
+                ['Doctor {doctor}' , 'Patient {patient_id}', 'Duration of Treatment {end_time - start_time}, Patient {patient_id}', new Date(0,0,0,0,0, {start_time}), new Date(0,0,0,0,0, {end_time})],
+            """
+    html_content += """
+        ]);
+        chart.draw(dataTable);
+        }"""
+    html_content += f"""
+        </script>
+        <div><p>Weighted Tardiness: {total_cost}; Runtime: {runTime}</p></div>
+        <div id=\"example3.1\" style=\"height: 1000px;\"></div>
+    """
 
-        webbrowser.open("schedule.html")
+    # Datei speichern
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(html_content)
+
+    print(f"HTML-Datei '{filename}' wurde erfolgreich erstellt.")
+    webbrowser.open(filename)
+
+#Schreibe relevante Daten in die Log.csv
+def log_data_to_csv_ND(doctors, solver_result, solver, completion_time, log_file_path="Log_ND.csv"):
+    # Aktuelles Datum und Zeit abrufen
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Daten für die CSV-Datei vorbereiten
+    data = [now, doctors, solver_result, solver, completion_time]
+
+    # In die CSV-Datei schreiben oder anhängen
+    file_exists = False
+    try:
+        with open(log_file_path, 'r', newline='') as csvfile:
+            file_exists = True
+    except FileNotFoundError:
+        pass
+
+    with open(log_file_path, 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        if not file_exists:
+            writer.writerow(["Datum und Zeit", "Doktoren", "Weighted Tardiness","Used Solver", "Completion Time in seconds"]) #Header schreiben
+        writer.writerow(data)
+
+    print(f"Daten wurden in '{log_file_path}' gespeichert.")
+
+#Visualisierung der deterministischen CP Lösung mit GoogleCharts in HTML
+def visualizeCPDeterministic(schedule, total_cost, runTime):
+    next_number = get_next_filename_number('./CPLoesungen', 'Loesung')
+    filename = os.path.join('./CPLoesungen', f"{'Loesung'}_{next_number}.html")
+
+    html_content = f"""
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load("current", {{packages:["timeline"]}});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {{
+        var container = document.getElementById('example3.1');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn({{ type: 'string', id: 'DoctorNumber' }});
+        dataTable.addColumn({{ type: 'string', id: 'PatientNumber' }});
+        dataTable.addColumn({{ type: 'string', role: 'tooltip' }});
+        dataTable.addColumn({{ type: 'date', id: 'Start' }});
+        dataTable.addColumn({{ type: 'date', id: 'End' }});
+
+        dataTable.addRows(["""
+    
+    for doctor, patient_data in schedule.items():
+        for row in patient_data:
+            patient_id = row[0]
+            start_time = row[1]
+            end_time = row[2]
+            html_content += f"""
+                ['Doctor {doctor}' , 'Patient {patient_id}', 'Duration of Treatment {end_time - start_time}, Patient {patient_id}', new Date(0,0,0,0,0, {start_time}), new Date(0,0,0,0,0, {end_time})],
+            """
+    html_content += """
+        ]);
+        chart.draw(dataTable);
+        }"""
+    html_content += f"""
+        </script>
+        <div><p>Weighted Tardiness: {total_cost}; Runtime: {runTime}</p></div>
+        <div id=\"example3.1\" style=\"height: 1000px;\"></div>
+    """
+
+    # Datei speichern
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(html_content)
+
+    print(f"HTML-Datei '{filename}' wurde erfolgreich erstellt.")
+    webbrowser.open(filename)

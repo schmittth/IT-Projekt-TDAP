@@ -1,0 +1,137 @@
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load("current", {packages:["timeline"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var container = document.getElementById('example3.1');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn({ type: 'string', id: 'DoctorNumber' });
+        dataTable.addColumn({ type: 'string', id: 'PatientNumber' });
+        dataTable.addColumn({ type: 'string', role: 'tooltip' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+
+        dataTable.addRows([
+                ['Doctor 0' , 'Patient 1', 'Duration of Treatment 20, Patient 1', new Date(0,0,0,0,0, 545), new Date(0,0,0,0,0, 565)],
+            
+                ['Doctor 0' , 'Patient 3', 'Duration of Treatment 15, Patient 3', new Date(0,0,0,0,0, 486), new Date(0,0,0,0,0, 501)],
+            
+                ['Doctor 0' , 'Patient 5', 'Duration of Treatment 20, Patient 5', new Date(0,0,0,0,0, 860), new Date(0,0,0,0,0, 880)],
+            
+                ['Doctor 0' , 'Patient 8', 'Duration of Treatment 30, Patient 8', new Date(0,0,0,0,0, 900), new Date(0,0,0,0,0, 930)],
+            
+                ['Doctor 0' , 'Patient 10', 'Duration of Treatment 28, Patient 10', new Date(0,0,0,0,0, 783), new Date(0,0,0,0,0, 811)],
+            
+                ['Doctor 0' , 'Patient 11', 'Duration of Treatment 6, Patient 11', new Date(0,0,0,0,0, 581), new Date(0,0,0,0,0, 587)],
+            
+                ['Doctor 0' , 'Patient 13', 'Duration of Treatment 18, Patient 13', new Date(0,0,0,0,0, 587), new Date(0,0,0,0,0, 605)],
+            
+                ['Doctor 0' , 'Patient 16', 'Duration of Treatment 18, Patient 16', new Date(0,0,0,0,0, 624), new Date(0,0,0,0,0, 642)],
+            
+                ['Doctor 0' , 'Patient 17', 'Duration of Treatment 24, Patient 17', new Date(0,0,0,0,0, 975), new Date(0,0,0,0,0, 999)],
+            
+                ['Doctor 0' , 'Patient 18', 'Duration of Treatment 15, Patient 18', new Date(0,0,0,0,0, 501), new Date(0,0,0,0,0, 516)],
+            
+                ['Doctor 0' , 'Patient 19', 'Duration of Treatment 17, Patient 19', new Date(0,0,0,0,0, 605), new Date(0,0,0,0,0, 622)],
+            
+                ['Doctor 0' , 'Patient 21', 'Duration of Treatment 22, Patient 21', new Date(0,0,0,0,0, 642), new Date(0,0,0,0,0, 664)],
+            
+                ['Doctor 0' , 'Patient 23', 'Duration of Treatment 19, Patient 23', new Date(0,0,0,0,0, 674), new Date(0,0,0,0,0, 693)],
+            
+                ['Doctor 0' , 'Patient 24', 'Duration of Treatment 20, Patient 24', new Date(0,0,0,0,0, 840), new Date(0,0,0,0,0, 860)],
+            
+                ['Doctor 0' , 'Patient 25', 'Duration of Treatment 29, Patient 25', new Date(0,0,0,0,0, 516), new Date(0,0,0,0,0, 545)],
+            
+                ['Doctor 0' , 'Patient 28', 'Duration of Treatment 22, Patient 28', new Date(0,0,0,0,0, 930), new Date(0,0,0,0,0, 952)],
+            
+                ['Doctor 0' , 'Patient 29', 'Duration of Treatment 16, Patient 29', new Date(0,0,0,0,0, 565), new Date(0,0,0,0,0, 581)],
+            
+                ['Doctor 0' , 'Patient 30', 'Duration of Treatment 29, Patient 30', new Date(0,0,0,0,0, 811), new Date(0,0,0,0,0, 840)],
+            
+                ['Doctor 0' , 'Patient 34', 'Duration of Treatment 10, Patient 34', new Date(0,0,0,0,0, 664), new Date(0,0,0,0,0, 674)],
+            
+                ['Doctor 0' , 'Patient 35', 'Duration of Treatment 23, Patient 35', new Date(0,0,0,0,0, 952), new Date(0,0,0,0,0, 975)],
+            
+                ['Doctor 0' , 'Patient 36', 'Duration of Treatment 2, Patient 36', new Date(0,0,0,0,0, 622), new Date(0,0,0,0,0, 624)],
+            
+                ['Doctor 0' , 'Patient 38', 'Duration of Treatment 12, Patient 38', new Date(0,0,0,0,0, 693), new Date(0,0,0,0,0, 705)],
+            
+                ['Doctor 0' , 'Patient 39', 'Duration of Treatment 18, Patient 39', new Date(0,0,0,0,0, 754), new Date(0,0,0,0,0, 772)],
+            
+                ['Doctor 0' , 'Patient 40', 'Duration of Treatment 20, Patient 40', new Date(0,0,0,0,0, 880), new Date(0,0,0,0,0, 900)],
+            
+                ['Doctor 0' , 'Patient 48', 'Duration of Treatment 23, Patient 48', new Date(0,0,0,0,0, 705), new Date(0,0,0,0,0, 728)],
+            
+                ['Doctor 0' , 'Patient 52', 'Duration of Treatment 26, Patient 52', new Date(0,0,0,0,0, 728), new Date(0,0,0,0,0, 754)],
+            
+                ['Doctor 0' , 'Patient 55', 'Duration of Treatment 11, Patient 55', new Date(0,0,0,0,0, 772), new Date(0,0,0,0,0, 783)],
+            
+                ['Doctor 1' , 'Patient 0', 'Duration of Treatment 14, Patient 0', new Date(0,0,0,0,0, 487), new Date(0,0,0,0,0, 501)],
+            
+                ['Doctor 1' , 'Patient 2', 'Duration of Treatment 19, Patient 2', new Date(0,0,0,0,0, 980), new Date(0,0,0,0,0, 999)],
+            
+                ['Doctor 1' , 'Patient 4', 'Duration of Treatment 5, Patient 4', new Date(0,0,0,0,0, 514), new Date(0,0,0,0,0, 519)],
+            
+                ['Doctor 1' , 'Patient 6', 'Duration of Treatment 13, Patient 6', new Date(0,0,0,0,0, 501), new Date(0,0,0,0,0, 514)],
+            
+                ['Doctor 1' , 'Patient 7', 'Duration of Treatment 1, Patient 7', new Date(0,0,0,0,0, 486), new Date(0,0,0,0,0, 487)],
+            
+                ['Doctor 1' , 'Patient 9', 'Duration of Treatment 19, Patient 9', new Date(0,0,0,0,0, 519), new Date(0,0,0,0,0, 538)],
+            
+                ['Doctor 1' , 'Patient 12', 'Duration of Treatment 23, Patient 12', new Date(0,0,0,0,0, 868), new Date(0,0,0,0,0, 891)],
+            
+                ['Doctor 1' , 'Patient 14', 'Duration of Treatment 21, Patient 14', new Date(0,0,0,0,0, 657), new Date(0,0,0,0,0, 678)],
+            
+                ['Doctor 1' , 'Patient 15', 'Duration of Treatment 17, Patient 15', new Date(0,0,0,0,0, 538), new Date(0,0,0,0,0, 555)],
+            
+                ['Doctor 1' , 'Patient 20', 'Duration of Treatment 14, Patient 20', new Date(0,0,0,0,0, 581), new Date(0,0,0,0,0, 595)],
+            
+                ['Doctor 1' , 'Patient 22', 'Duration of Treatment 40, Patient 22', new Date(0,0,0,0,0, 940), new Date(0,0,0,0,0, 980)],
+            
+                ['Doctor 1' , 'Patient 26', 'Duration of Treatment 26, Patient 26', new Date(0,0,0,0,0, 555), new Date(0,0,0,0,0, 581)],
+            
+                ['Doctor 1' , 'Patient 27', 'Duration of Treatment 11, Patient 27', new Date(0,0,0,0,0, 631), new Date(0,0,0,0,0, 642)],
+            
+                ['Doctor 1' , 'Patient 31', 'Duration of Treatment 21, Patient 31', new Date(0,0,0,0,0, 595), new Date(0,0,0,0,0, 616)],
+            
+                ['Doctor 1' , 'Patient 32', 'Duration of Treatment 25, Patient 32', new Date(0,0,0,0,0, 915), new Date(0,0,0,0,0, 940)],
+            
+                ['Doctor 1' , 'Patient 33', 'Duration of Treatment 15, Patient 33', new Date(0,0,0,0,0, 616), new Date(0,0,0,0,0, 631)],
+            
+                ['Doctor 1' , 'Patient 37', 'Duration of Treatment 15, Patient 37', new Date(0,0,0,0,0, 642), new Date(0,0,0,0,0, 657)],
+            
+                ['Doctor 1' , 'Patient 41', 'Duration of Treatment 31, Patient 41', new Date(0,0,0,0,0, 837), new Date(0,0,0,0,0, 868)],
+            
+                ['Doctor 1' , 'Patient 42', 'Duration of Treatment 24, Patient 42', new Date(0,0,0,0,0, 701), new Date(0,0,0,0,0, 725)],
+            
+                ['Doctor 1' , 'Patient 43', 'Duration of Treatment 24, Patient 43', new Date(0,0,0,0,0, 891), new Date(0,0,0,0,0, 915)],
+            
+                ['Doctor 1' , 'Patient 44', 'Duration of Treatment 13, Patient 44', new Date(0,0,0,0,0, 678), new Date(0,0,0,0,0, 691)],
+            
+                ['Doctor 1' , 'Patient 45', 'Duration of Treatment 22, Patient 45', new Date(0,0,0,0,0, 759), new Date(0,0,0,0,0, 781)],
+            
+                ['Doctor 1' , 'Patient 46', 'Duration of Treatment 7, Patient 46', new Date(0,0,0,0,0, 725), new Date(0,0,0,0,0, 732)],
+            
+                ['Doctor 1' , 'Patient 47', 'Duration of Treatment 10, Patient 47', new Date(0,0,0,0,0, 691), new Date(0,0,0,0,0, 701)],
+            
+                ['Doctor 1' , 'Patient 49', 'Duration of Treatment 11, Patient 49', new Date(0,0,0,0,0, 748), new Date(0,0,0,0,0, 759)],
+            
+                ['Doctor 1' , 'Patient 50', 'Duration of Treatment 9, Patient 50', new Date(0,0,0,0,0, 828), new Date(0,0,0,0,0, 837)],
+            
+                ['Doctor 1' , 'Patient 51', 'Duration of Treatment 19, Patient 51', new Date(0,0,0,0,0, 809), new Date(0,0,0,0,0, 828)],
+            
+                ['Doctor 1' , 'Patient 53', 'Duration of Treatment 16, Patient 53', new Date(0,0,0,0,0, 732), new Date(0,0,0,0,0, 748)],
+            
+                ['Doctor 1' , 'Patient 54', 'Duration of Treatment 15, Patient 54', new Date(0,0,0,0,0, 794), new Date(0,0,0,0,0, 809)],
+            
+                ['Doctor 1' , 'Patient 56', 'Duration of Treatment 13, Patient 56', new Date(0,0,0,0,0, 781), new Date(0,0,0,0,0, 794)],
+            
+        ]);
+        chart.draw(dataTable);
+        }
+        </script>
+        <div><p>Weighted Tardiness: 10206.0; Runtime: 60.09875440597534</p></div>
+        <div id="example3.1" style="height: 1000px;"></div>
+    

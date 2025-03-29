@@ -3,7 +3,7 @@ import Neighbourhoods as nh
 import classes
 import visualization
 import Console
-import PM_Solver as cp
+import archiv.PM_Solver as cp
 
 filePath, doctors, runTime = Console.executeConsole()
 """instance = eh.map_patient_data(filePath, doctors)

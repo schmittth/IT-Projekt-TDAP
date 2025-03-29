@@ -27,3 +27,23 @@ Datum und Zeit,filePath,Doktoren,Weighted Tardiness after Opening,Used Meta-heur
 2025-02-25 14:41:01,new_test_instances_short.json,2,751,Variable Neighborhood Search,112,Yes,10.04353666305542
 2025-02-25 14:52:38,new_test_instances_short.json,2,751,Variable Neighborhood Search,110,Yes,5.099741220474243
 2025-02-25 14:54:02,new_test_instances_short.json,10,0,Variable Neighborhood Search,0,Yes,5.010264873504639
+2025-03-22 14:28:53,new_test_instances copy.json,3,/,CPSolver,0.0,Yes,0.033055782318115234
+2025-03-22 14:30:24,new_test_instances copy.json,3,a,CPSolver,0.0,Yes,0.03572368621826172
+2025-03-22 14:31:30,new_test_instances copy.json,3,/,CPSolver,0.0,Yes,0.026877164840698242
+2025-03-24 11:29:39,new_test_instances copy.json,2,/,CPSolver,62.0,Yes,48.56299614906311
+2025-03-24 11:30:06,new_test_instances.json,4,/,CPSolver,0.0,Yes,0.26601624488830566
+2025-03-24 11:35:22,new_test_instances.json,3,/,CPSolver,1194.0,Yes,300.07052779197693
+2025-03-24 11:41:41,new_test_instances.json,3,/,CPSolver,1225.0,Yes,60.13536787033081
+2025-03-24 12:01:21,new_test_instances.json,3,/,CPSolver,1156.0,Yes,900.1135103702545
+2025-03-24 12:05:07,new_test_instances.json,3,/,CPSolver,1282.0,Yes,60.07236289978027
+2025-03-24 12:07:07,new_test_instances.json,3,/,CPSolver,1250.0,Yes,120.05735445022583
+2025-03-24 12:10:08,new_test_instances.json,3,/,CPSolver,1236.0,Yes,180.2165331840515
+2025-03-24 12:14:08,new_test_instances.json,3,/,CPSolver,1199.0,Yes,240.0654284954071
+2025-03-24 12:19:08,new_test_instances.json,3,/,CPSolver,1173.0,Yes,300.0745041370392
+2025-03-24 12:25:09,new_test_instances.json,3,/,CPSolver,1182.0,Yes,360.0619568824768
+2025-03-24 12:32:09,new_test_instances.json,3,/,CPSolver,1158.0,Yes,420.09257221221924
+2025-03-24 12:40:09,new_test_instances.json,3,/,CPSolver,1160.0,Yes,480.0736463069916
+2025-03-24 12:49:09,new_test_instances.json,3,/,CPSolver,1190.0,Yes,540.0961656570435
+2025-03-24 17:43:57,new_test_instances.json,4,/,CPSolver,0.0,Yes,0.17634868621826172
+2025-03-24 17:46:20,new_test_instances.json,3,/,CPSolver,1214.0,Yes,60.04682421684265
+2025-03-29 13:47:45,Test.json,1,/,CPSolver,0.0,Yes,0.03567767143249512
