@@ -1,0 +1,102 @@
+[
+  {
+    "patient_id": 0,
+    "day": 4,
+    "arrival_time": 1222,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 14,
+    "realized_processing_time": 11
+  },
+  {
+    "patient_id": 1,
+    "day": 4,
+    "arrival_time": 1235,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 16
+  },
+  {
+    "patient_id": 2,
+    "day": 4,
+    "arrival_time": 1238,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 9
+  },
+  {
+    "patient_id": 3,
+    "day": 4,
+    "arrival_time": 1239,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 14
+  },
+  {
+    "patient_id": 4,
+    "day": 4,
+    "arrival_time": 1240,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 15
+  },
+  {
+    "patient_id": 5,
+    "day": 4,
+    "arrival_time": 1246,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 21
+  },
+  {
+    "patient_id": 6,
+    "day": 4,
+    "arrival_time": 1267,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 19
+  },
+  {
+    "patient_id": 7,
+    "day": 4,
+    "arrival_time": 1289,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 14,
+    "realized_processing_time": 5
+  },
+  {
+    "patient_id": 8,
+    "day": 4,
+    "arrival_time": 1291,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 17
+  },
+  {
+    "patient_id": 9,
+    "day": 4,
+    "arrival_time": 1311,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 19
+  }
+]

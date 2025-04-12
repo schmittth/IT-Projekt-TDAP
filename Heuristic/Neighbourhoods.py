@@ -22,6 +22,7 @@ def calculate_start_and_endtimes_per_doc(schedule, key, start_time=0):
     schedule[key][:, 6] = result
 
 def calculate_start_and_endtimes_per_doc_non_det(schedule, key, start_time=0):
+    
     for i in range(len(schedule[key])):
         if i == 0 and start_time == 0:
             schedule[key][0, [4]] = schedule[key][0, [1]] + schedule[key][0, [2]]
@@ -41,6 +42,8 @@ def calculate_start_and_endtimes_per_doc_non_det(schedule, key, start_time=0):
 
 def weighted_tardiness_per_doc(schedule, key):
     # Wähle die Spalten 7 und 8 (Index 6 und 7) aus
+    if len(schedule[key]) == 0:
+        return 0
     Tardiness = schedule[key][:, 6]
     weight = schedule[key][:, 7]
 
@@ -257,11 +260,11 @@ def best_swap_N3(schedule, key1, key2, deterministic, Max_d = 120, start_time_1=
 from copy import deepcopy
 import random
 
-def random_shake(schedule, Max_d, start_time_array, deterministic):
+def random_shake(schedule, Max_d, start_time_array, deterministic, operations=['N1', 'N2', 'N3']):
     temp_schedule = deepcopy(schedule)
     
     # Wähle eine zufällige Nachbarschaftsoperation: N1, N2 oder N3
-    operation = random.choice(['N1', 'N2', 'N3'])
+    operation = random.choice(operations)
     keys = list(schedule.keys())
     if operation == 'N3' and len(keys)>1:
         # Randomly select two doctors and one patient from each for N3
@@ -302,7 +305,7 @@ def random_shake(schedule, Max_d, start_time_array, deterministic):
     
     return temp_schedule, overall_tardiness
 
-def VND(schedule, overall_tardiness, neighborhoods,start_time_array, deterministic, Max_d=120):
+def VND(schedule, overall_tardiness, neighborhoods,start_time_array, deterministic, Max_d, vns_start_time, max_time):
     current_schedule = deepcopy(schedule)
     current_tardiness = overall_tardiness
     improvement = True
@@ -326,6 +329,10 @@ def VND(schedule, overall_tardiness, neighborhoods,start_time_array, determinist
                 current_tardiness = deepcopy(_)
                 improvement = True
                 break  # Beginne die Suche erneut bei der ersten Nachbarschaft
+            
+            completion_time = time.time() - vns_start_time
+            if completion_time >= max_time:
+                return current_schedule, current_tardiness
 
     return current_schedule, current_tardiness
 
@@ -343,14 +350,15 @@ def general_vns(initial_schedule, initial_tardiness ,neighborhoods, start_time_a
     completion_time = time.time() - start_time
     while completion_time <= time_limit:
         if not no_improvement_count <= no_improvement_limit:
-            print(f"No improvement for {no_improvement_limit} iterations")
+            #print(f"No improvement for {no_improvement_limit} iterations")
+            #print(f"Schedule: {best_schedule}")
             completion_time = time.time() - start_time
             return best_schedule, best_schedule_tardiness, completion_time 
         
         # Shake: Erzeugen einer neuen Lösung durch eine zufällige Veränderung
         shaken_schedule, shaken_tardiness = random_shake(current_schedule, Max_d=Max_d, start_time_array=start_time_array, deterministic=deterministic)
         # VND: Anwenden der lokalen Optimierung
-        vnd_schedule, vnd_tardiness = VND(shaken_schedule, shaken_tardiness, neighborhoods=neighborhoods, Max_d=Max_d, start_time_array=start_time_array, deterministic=deterministic)
+        vnd_schedule, vnd_tardiness = VND(shaken_schedule, shaken_tardiness, neighborhoods=neighborhoods, Max_d=Max_d, start_time_array=start_time_array, deterministic=deterministic, vns_start_time=start_time, max_time=time_limit)
 
         # Bewertung der neuen Lösung
         if vnd_tardiness < best_schedule_tardiness:
@@ -359,6 +367,8 @@ def general_vns(initial_schedule, initial_tardiness ,neighborhoods, start_time_a
             best_schedule_tardiness = vnd_tardiness
             current_schedule = vnd_schedule
             no_improvement_count = 0  # Reset, da eine Verbesserung gefunden wurde
+            if best_schedule_tardiness == 0:
+                return best_schedule, best_schedule_tardiness, completion_time
         else:
             no_improvement_count += 1
         completion_time = time.time() - start_time
@@ -411,12 +421,74 @@ def simulated_annealing(schedule, total_tardiness, start_time_array, Imax=1000, 
                     print(f"Better Solution: {(time.time() - start_time)},{temperature}, {I} {current_best_solution_tardiness} to {current_tardiness}")
                     current_best_solution = deepcopy(current_schedule) # Set S* (currently best solution) to S'
                     current_best_solution_tardiness = deepcopy(current_tardiness)
+                    if current_best_solution_tardiness == 0:
+                        return (current_best_solution, current_best_solution_tardiness, temperature)
             else:
                 # Accept solutions with a certain probability
                 acceptance_probability = math.exp(-delta / temperature) # Exponential function e^-delta/ temperature
                 if random.random() < acceptance_probability:
                     #print(f"Accepted bad Solution")
                     current_schedule = deepcopy(shaken_schedule) # Set S = S' if the random variable is less than the exponential function
+                    current_tardiness = deepcopy(new_tardiness)
+                # Increase iteration counter by 1
+            I += 1
+            # Cool down the temperature
+        temperature *= cooling_rate
+    return (current_best_solution, current_best_solution_tardiness, temperature)
+    
+
+def simulated_annealing_by_neighborhood(schedule, total_tardiness, start_time_array, Imax=1000, cooling_rate=0.95, min_temperature=1.0, start_temperature=100, time_limit=600, Max_d=120, deterministic=True, operations=['N3']):
+    current_schedule = deepcopy(schedule) # Start solution (S) is the result from the opening heuristic
+    current_tardiness = deepcopy(total_tardiness) # Calculate the makespan of the start solution
+    # Input seed for reproducibility if necessary
+    np.random.seed()
+    random.seed()
+    # Possibility to count not best but accepted solutions
+    current_best_solution = current_schedule
+    current_best_solution_tardiness = current_tardiness
+
+    temperature =  start_temperature 
+    cooling_rate = cooling_rate  
+    min_temperature = min_temperature 
+    start_time = time.time()
+    Imax = Imax
+    bad_count = 0
+    # Iterate while the temperature is sufficiently high
+    while temperature > min_temperature:
+        I = 1
+
+        while I <= Imax:
+            # If time limit is set and triggered, return solution
+            if time_limit is not None and (time.time() - start_time) > time_limit:
+                 return (current_best_solution, current_best_solution_tardiness, temperature)
+                
+            # Compute new_schedule according to the chosen neighborhood definition
+            # Durchlaufe solange random_shake bis eine gültige Lösung erreicht ist
+            # random_shake ist die Durchführung einer zufälligen Nachbarschaftsdefinition
+            new_tardiness = current_tardiness
+            #while new_tardiness == current_tardiness:
+                #shaken_schedule, new_tardiness = random_shake(current_schedule, Max_d=Max_d, start_time_array=start_time_array)
+            shaken_schedule, new_tardiness = random_shake(current_schedule, Max_d=Max_d, start_time_array=start_time_array, deterministic=deterministic, operations=operations)
+
+
+            # Calculate the energy difference (Difference in Tardiness)
+            delta = new_tardiness - current_tardiness
+            if delta < 0:
+                current_schedule = shaken_schedule # Set S = S' if the Tardiness of S' is better than S
+                current_tardiness = new_tardiness
+                    
+                if current_tardiness < current_best_solution_tardiness:
+                    print(f"Better Solution: {(time.time() - start_time)},{temperature}, {I} {current_best_solution_tardiness} to {current_tardiness}; accepted bad Solutions: {bad_count}")
+                    current_best_solution = deepcopy(current_schedule) # Set S* (currently best solution) to S'
+                    current_best_solution_tardiness = deepcopy(current_tardiness)
+            else:
+                # Accept solutions with a certain probability
+                acceptance_probability = math.exp(-delta / temperature) # Exponential function e^-delta/ temperature
+                if random.random() < acceptance_probability:
+                    #print(f"Accepted bad Solution")
+                    bad_count += 1
+                    current_schedule = deepcopy(shaken_schedule) # Set S = S' if the random variable is less than the exponential function
+                    current_tardiness = deepcopy(new_tardiness)
 
                 # Increase iteration counter by 1
             I += 1
@@ -425,4 +497,43 @@ def simulated_annealing(schedule, total_tardiness, start_time_array, Imax=1000, 
     return (current_best_solution, current_best_solution_tardiness, temperature)
     
     
+def general_vns_cyclic(initial_schedule, initial_tardiness ,neighborhoods, start_time_array, Max_d=120, no_improvement_limit=1000, time_limit = 60, deterministic=True):
+    current_schedule = deepcopy(initial_schedule)
+    best_schedule = current_schedule
+    best_schedule_tardiness = initial_tardiness
+    no_improvement_count = 0
+    neighborhoods = ['N1', 'N2', 'N3']
+    start_time = time.time()
+    i = 0
     
+
+    completion_time = time.time() - start_time
+    while completion_time <= time_limit:
+        if not no_improvement_count <= no_improvement_limit:
+            #print(f"No improvement for {no_improvement_limit} iterations")
+            #print(f"Schedule: {best_schedule}")
+            completion_time = time.time() - start_time
+            return best_schedule, best_schedule_tardiness, completion_time 
+        
+        # Shake: Erzeugen einer neuen Lösung durch eine zufällige Veränderung
+        shaken_schedule, shaken_tardiness = random_shake(current_schedule, Max_d=Max_d, start_time_array=start_time_array, deterministic=deterministic, operations=[neighborhoods[i]])
+        # VND: Anwenden der lokalen Optimierung
+        vnd_schedule, vnd_tardiness = VND(shaken_schedule, shaken_tardiness, neighborhoods=neighborhoods, Max_d=Max_d, start_time_array=start_time_array, deterministic=deterministic)
+        if i == 2:
+            i = 0
+        else:
+            i+=1
+        # Bewertung der neuen Lösung
+        if vnd_tardiness < best_schedule_tardiness:
+            print(f"Bessere Lösung {completion_time}: {best_schedule_tardiness} auf {vnd_tardiness}")
+            best_schedule = vnd_schedule
+            best_schedule_tardiness = vnd_tardiness
+            current_schedule = vnd_schedule
+            no_improvement_count = 0  # Reset, da eine Verbesserung gefunden wurde
+            if best_schedule_tardiness == 0:
+                return best_schedule, best_schedule_tardiness, completion_time
+        else:
+            no_improvement_count += 1
+        completion_time = time.time() - start_time
+        
+    return best_schedule, best_schedule_tardiness, completion_time

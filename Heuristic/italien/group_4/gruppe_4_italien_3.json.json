@@ -1,0 +1,452 @@
+[
+  {
+    "patient_id": 0,
+    "day": 3,
+    "arrival_time": 721,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 4
+  },
+  {
+    "patient_id": 1,
+    "day": 3,
+    "arrival_time": 728,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 18
+  },
+  {
+    "patient_id": 2,
+    "day": 3,
+    "arrival_time": 728,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 24
+  },
+  {
+    "patient_id": 3,
+    "day": 3,
+    "arrival_time": 729,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 11
+  },
+  {
+    "patient_id": 4,
+    "day": 3,
+    "arrival_time": 729,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 20
+  },
+  {
+    "patient_id": 5,
+    "day": 3,
+    "arrival_time": 730,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 4
+  },
+  {
+    "patient_id": 6,
+    "day": 3,
+    "arrival_time": 732,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 31
+  },
+  {
+    "patient_id": 7,
+    "day": 3,
+    "arrival_time": 732,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 18
+  },
+  {
+    "patient_id": 8,
+    "day": 3,
+    "arrival_time": 733,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 18
+  },
+  {
+    "patient_id": 9,
+    "day": 3,
+    "arrival_time": 734,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 11
+  },
+  {
+    "patient_id": 10,
+    "day": 3,
+    "arrival_time": 740,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 19
+  },
+  {
+    "patient_id": 11,
+    "day": 3,
+    "arrival_time": 740,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 13
+  },
+  {
+    "patient_id": 12,
+    "day": 3,
+    "arrival_time": 744,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 10
+  },
+  {
+    "patient_id": 13,
+    "day": 3,
+    "arrival_time": 744,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 18
+  },
+  {
+    "patient_id": 14,
+    "day": 3,
+    "arrival_time": 746,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 12
+  },
+  {
+    "patient_id": 15,
+    "day": 3,
+    "arrival_time": 758,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 20
+  },
+  {
+    "patient_id": 16,
+    "day": 3,
+    "arrival_time": 758,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 30
+  },
+  {
+    "patient_id": 17,
+    "day": 3,
+    "arrival_time": 758,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 8
+  },
+  {
+    "patient_id": 18,
+    "day": 3,
+    "arrival_time": 770,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 21
+  },
+  {
+    "patient_id": 19,
+    "day": 3,
+    "arrival_time": 775,
+    "urgency_level": 1,
+    "weight": 4,
+    "max_wait_time": 0,
+    "expected_processing_time": 23,
+    "realized_processing_time": 23
+  },
+  {
+    "patient_id": 20,
+    "day": 3,
+    "arrival_time": 778,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 3
+  },
+  {
+    "patient_id": 21,
+    "day": 3,
+    "arrival_time": 789,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 21
+  },
+  {
+    "patient_id": 22,
+    "day": 3,
+    "arrival_time": 792,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 19
+  },
+  {
+    "patient_id": 23,
+    "day": 3,
+    "arrival_time": 793,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 7
+  },
+  {
+    "patient_id": 24,
+    "day": 3,
+    "arrival_time": 793,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 8
+  },
+  {
+    "patient_id": 25,
+    "day": 3,
+    "arrival_time": 796,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 16
+  },
+  {
+    "patient_id": 26,
+    "day": 3,
+    "arrival_time": 797,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 15
+  },
+  {
+    "patient_id": 27,
+    "day": 3,
+    "arrival_time": 803,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 22
+  },
+  {
+    "patient_id": 28,
+    "day": 3,
+    "arrival_time": 807,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 12
+  },
+  {
+    "patient_id": 29,
+    "day": 3,
+    "arrival_time": 809,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 23
+  },
+  {
+    "patient_id": 30,
+    "day": 3,
+    "arrival_time": 810,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 34
+  },
+  {
+    "patient_id": 31,
+    "day": 3,
+    "arrival_time": 815,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 22
+  },
+  {
+    "patient_id": 32,
+    "day": 3,
+    "arrival_time": 825,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 34
+  },
+  {
+    "patient_id": 33,
+    "day": 3,
+    "arrival_time": 826,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 8
+  },
+  {
+    "patient_id": 34,
+    "day": 3,
+    "arrival_time": 828,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 22
+  },
+  {
+    "patient_id": 35,
+    "day": 3,
+    "arrival_time": 829,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 22
+  },
+  {
+    "patient_id": 36,
+    "day": 3,
+    "arrival_time": 830,
+    "urgency_level": 4,
+    "weight": 1,
+    "max_wait_time": 120,
+    "expected_processing_time": 13,
+    "realized_processing_time": 8
+  },
+  {
+    "patient_id": 37,
+    "day": 3,
+    "arrival_time": 835,
+    "urgency_level": 1,
+    "weight": 4,
+    "max_wait_time": 0,
+    "expected_processing_time": 23,
+    "realized_processing_time": 22
+  },
+  {
+    "patient_id": 38,
+    "day": 3,
+    "arrival_time": 838,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 15
+  },
+  {
+    "patient_id": 39,
+    "day": 3,
+    "arrival_time": 847,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 16
+  },
+  {
+    "patient_id": 40,
+    "day": 3,
+    "arrival_time": 853,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 14
+  },
+  {
+    "patient_id": 41,
+    "day": 3,
+    "arrival_time": 886,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 14
+  },
+  {
+    "patient_id": 42,
+    "day": 3,
+    "arrival_time": 894,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 39
+  },
+  {
+    "patient_id": 43,
+    "day": 3,
+    "arrival_time": 903,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 17,
+    "realized_processing_time": 10
+  },
+  {
+    "patient_id": 44,
+    "day": 3,
+    "arrival_time": 909,
+    "urgency_level": 2,
+    "weight": 3,
+    "max_wait_time": 15,
+    "expected_processing_time": 21,
+    "realized_processing_time": 3
+  }
+]

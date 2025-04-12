@@ -1,0 +1,52 @@
+[
+  {
+    "patient_id": 0,
+    "day": 2,
+    "arrival_time": 244,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 18,
+    "realized_processing_time": 12
+  },
+  {
+    "patient_id": 1,
+    "day": 2,
+    "arrival_time": 266,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 18,
+    "realized_processing_time": 24
+  },
+  {
+    "patient_id": 2,
+    "day": 2,
+    "arrival_time": 297,
+    "urgency_level": 1,
+    "weight": 4,
+    "max_wait_time": 0,
+    "expected_processing_time": 29,
+    "realized_processing_time": 22
+  },
+  {
+    "patient_id": 3,
+    "day": 2,
+    "arrival_time": 302,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 18,
+    "realized_processing_time": 17
+  },
+  {
+    "patient_id": 4,
+    "day": 2,
+    "arrival_time": 355,
+    "urgency_level": 3,
+    "weight": 2,
+    "max_wait_time": 60,
+    "expected_processing_time": 18,
+    "realized_processing_time": 24
+  }
+]
